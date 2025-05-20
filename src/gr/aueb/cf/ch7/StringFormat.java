@@ -10,6 +10,6 @@ public class StringFormat {
         int num = 10;
 
         String formattedStr = String.format("%s:%d", s ,num);
-        System.out.println(formattedStr);
+
     }
 }
