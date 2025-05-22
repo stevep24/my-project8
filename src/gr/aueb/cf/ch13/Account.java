@@ -119,4 +119,22 @@ public class Account {
     private boolean isSsnValid(String ssn){
         return this.ssn.equals(ssn);
     }
+
+    /**
+     * Returns the balance of the account.
+     * @param balance
+     * @return the {@link Account} balance.
+     */
+    public double getAccountBalance(double balance){
+        return getBalance();
+
+    }
+
+    /**
+     * Returns the {@link Account} state in String format.
+     * @return the string-representation of the {@link Account}
+     */
+    public String accountToString(){
+        return "(" + id + "," + firstname + "," + lastname + "," + ssn + "," + balance + ")";
+    }
 }
