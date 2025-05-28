@@ -1,4 +1,4 @@
-package gr.aueb.cf.ch13;
+package gr.aueb.cf.ch15.custom_exceptions;
 
 public class Main {
 

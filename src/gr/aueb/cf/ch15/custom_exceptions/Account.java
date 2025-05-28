@@ -1,4 +1,7 @@
-package gr.aueb.cf.ch13;
+package gr.aueb.cf.ch15.custom_exceptions;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Account {
     private int id;
@@ -73,45 +76,45 @@ public class Account {
      * @param amount the amount of money to be deposited
      * @throws Exception if the amount is negative.
      */
-    public void deposit(double amount) throws Exception{
+    public void deposit(double amount) throws NegativeAmountException{
 
         try{
             if (amount < 0){
-                throw new Exception("negative amount is not valid");
+                throw new NegativeAmountException("Το ποσό "+ amount + "είναι αρνητικό");
             }
             balance += amount;
 
-        } catch (Exception e) {
-            System.err.println("Negative amount = " + amount + " is not valid");
+        } catch (NegativeAmountException e) {
+            System.err.println(LocalDateTime.now() + "Amount= " + amount + " is not valid\n" + e);
             throw e;
         }
     }
 
     /**
-     * Withdraws an amount of money from the {@link Account}.
-     * First, checks if ssn is valid by calling {@link Account#isSsnValid(String)}
+     * Withdraws a specified amount of money from the account if the provided details are valid.
      *
-     * @param amount        the amount to withdraw
-     * @param ssn           the given ssn.
-     * @throws Exception    if amount is negative, or balance is not sufficient
-     *                      or ssn is not valid
+     * @param amount the amount to be withdrawn
+     * @param ssn the social security number of the account holder for validation
+     * @throws NegativeAmountException if the specified amount is negative
+     * @throws InsufficientBalanceException if the account balance is insufficient for the withdrawal
+     * @throws SsnNotValidException if the provided SSN does not match the account holder's SSN
      */
-    public void withdraw( double amount, String ssn) throws Exception {
+    public void withdraw( double amount, String ssn) throws NegativeAmountException,InsufficientBalanceException,SsnNotValidException {
         try{
             if (amount < 0 ){
-                throw new Exception("Negative amount is not valid");
+                throw new NegativeAmountException("Το Ποσό " + amount + "είναι αρνητικό");
             }
 
             if (amount > balance){
-                throw new Exception("Insufficient balance for withdrawal.");
+                throw new InsufficientBalanceException("Το υπόλοιπο " + amount + " δεν επαρκεί");
             }
 
             if (!isSsnValid(ssn)){
-                throw new Exception("Ssn is not valid.");
+                throw new SsnNotValidException("Το ssn " + ssn + "δεν είναι έγκυρο");
             }
             balance -= amount;
-        }catch (Exception e){
-            System.out.println("Withdraw fail." + e);
+        }catch (NegativeAmountException | SsnNotValidException | InsufficientBalanceException e){
+            System.err.println(LocalDateTime.now() + "\n" + e);
             throw e;
         }
     }

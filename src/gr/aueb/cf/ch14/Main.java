@@ -6,5 +6,10 @@ public class Main {
 
         Point p1 = Point.getInstance();
         Point p2 = Point.getRandomInstance();
+
+        CodingFactory cf1= CodingFactory.getInstance();
+        CodingFactory cf2= CodingFactory.getInstance();
+        CodingFactory cf3= CodingFactory.getInstance();
+
     }
 }

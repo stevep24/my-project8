@@ -1,4 +1,4 @@
-package gr.aueb.cf.quiz;
+package gr.aueb.cf.ch10_challenges;
 
 import static java.lang.Math.abs;
 

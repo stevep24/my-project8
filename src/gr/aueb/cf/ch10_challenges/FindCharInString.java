@@ -1,4 +1,4 @@
-package gr.aueb.cf.quiz;
+package gr.aueb.cf.ch10_challenges;
 
 public class FindCharInString {
 
