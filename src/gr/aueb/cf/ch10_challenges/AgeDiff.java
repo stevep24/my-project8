@@ -1,4 +1,4 @@
-package gr.aueb.cf.challenges;
+package gr.aueb.cf.quiz;
 
 import java.util.Scanner;
 
