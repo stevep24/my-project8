@@ -35,6 +35,6 @@ public class AccountDAOImpl implements IAccountDAO {
 
     @Override
     public List<Account> getAccounts() {
-        return List.of();
+        return new ArrayList<>(accounts);
     }
 }
