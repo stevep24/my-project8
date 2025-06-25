@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AccountServiceImpl implements IAccountService{
     //private final IAccountDAO accountDAO = new AccountDAOImpl();
@@ -109,6 +110,17 @@ public class AccountServiceImpl implements IAccountService{
 
     @Override
     public List<AccountReadOnlyDTO> getAccounts() {
-        return List.of();
+        return accountDAO.getAccounts().
+                stream()
+                .map(Mapper::mapToReadOnlyDto)
+                .collect(Collectors.toList());
+
+//        List<AccountReadOnlyDTO> readOnlyDTOS;
+//        List<Account> accounts = accountDAO.getAccounts();
+//
+//        for (Account account : accounts){
+//            readOnlyDTOS.add(Mapper.mapToReadOnlyDto(account));
+//        }
+//        return readOnlyDTOS
     }
 }
