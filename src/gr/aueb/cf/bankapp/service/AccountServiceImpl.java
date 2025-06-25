@@ -12,6 +12,7 @@ import gr.aueb.cf.bankapp.model.Account;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AccountServiceImpl implements IAccountService{
@@ -79,10 +80,10 @@ public class AccountServiceImpl implements IAccountService{
             accountDAO.saveOrUpdate(account);
 
         } catch (AccountNotFoundException e) {
-            System.err.printf("%s. The amount = %f is negative. \n%s" , LocalDateTime.now(),amount,e);
+            System.err.printf("%s. The account with iban:%s not found. \n%s" , LocalDateTime.now(),iban,e);
             throw e;
         }catch (NegativeAmountException e){
-            System.err.printf("%s. The account with iban:%s not found. \n%s", LocalDateTime.now(),iban,e);
+            System.err.printf("%s. The amount = %f is negative. \n%s", LocalDateTime.now(),amount,e);
             throw e;
         }catch (InsufficientBalanceException e){
             System.err.printf("%s. the amount:%s is greater than balance:%s. \n%s  ", LocalDateTime.now(),amount,e);
@@ -96,7 +97,14 @@ public class AccountServiceImpl implements IAccountService{
 
     @Override
     public BigDecimal getBalance(String iban) throws AccountNotFoundException {
-        return null;
+        try {
+            Account account = accountDAO.getByIban(iban).
+                    orElseThrow(()-> new AccountNotFoundException("Account with iban " + iban + " not found"));
+            return account.getBalance();
+        } catch (AccountNotFoundException e){
+           System.err.printf("%s. The account with iban:%s not found. \n%s" , LocalDateTime.now(),iban,e);
+           throw e;
+        }
     }
 
     @Override
